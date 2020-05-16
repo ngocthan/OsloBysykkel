@@ -3,7 +3,7 @@ Viser en liste over de ulike stasjonene, tilgjengelige låser og ledige sykler v
 
 Dette er en webapp laget med Spring Boot og React.
 Sjekk ut koden og kjør
-
+<br/>
 mvn clean install
 
 java -jar target/sykkelstativer.jar

@@ -1,10 +1,11 @@
-package no.oslobysykkel.sykkelstativer;
+package no.oslobysykkel.sykkelstativer.controller;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -14,26 +15,24 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ControllerTest {
-    private final String CONTENT_TYPE_TEXT_PLAIN_UTF8 = "text/plain;charset=UTF-8"; //UTF-8 for norwegian characters Ø Æ Å
-
+public class OsloBySykkelControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @Test
-    public void getStationStatus_returnsHttpStatus200Ok() throws Exception {
+    public void getStations_returnsHttpStatus200Ok() throws Exception {
         mvc.perform(get("/api/getStations"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void getStationStatus_returnsExpectedContentType() throws Exception {
+    public void getStations_returnsExpectedContentType() throws Exception {
         mvc.perform(get("/api/getStations"))
-                .andExpect(content().contentTypeCompatibleWith(CONTENT_TYPE_TEXT_PLAIN_UTF8));
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON_UTF8_VALUE));
     }
 
-   @Test
-    public void getStationStatus_returnsExpectedJsonModel() throws Exception {
+    @Test
+    public void getStations_returnsExpectedJsonModel() throws Exception {
         mvc.perform(get("/api/getStations"))
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0]").isMap())
